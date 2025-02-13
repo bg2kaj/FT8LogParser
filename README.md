@@ -20,34 +20,54 @@ FT8LogParser正是这样的一款软件，她将日志文件的每条条目进�
 软件为纯命令行界面，通过输入指令进行操作。在第一次启动软件前，需要注意：
 
 1）使用记事本打开config.ini文件，在[STATION]一栏中填入你的台站的经纬度信息，其中LATITUDE为纬度，LONGITUDE为经度。默认值为北京地区的经纬度，请按照你的位置修改。该项不准确将导致距离计算不准确。[ANALYSE]一栏中ACCURACY为计算时的时间跨度，也即软件会把n分钟内的信息平均计算。默认值为60分钟，对于HF工作来说应当足够。对于VHF操作者可以将其改为15或更小。但需要注意的是，该值越大，则计算时间会进一步延长。
+
 2）本软件使用BigCty.dat文件计算台站的DXCC和距离，该文件由Jim Reisert AD1C编著。如果你需要精确计算，可以自己手动更新。更新网址为https://www.country-files.com/ 。下载最新的Big CTY文件后，将压缩包中的cty.dat放入FT8LogParser文件夹中并执行datparse.exe。等待其执行完成后便可继续操作。当前软件自带的Big Cty文件版本为2025-Jan-31.
 
 准备好后，在FT8LogParser文件夹中打开命令提示符（或直接双击start.bat文件）。在命令提示符界面中输入：
+
 FT8LogParser.exe -x y.txt
+
 -x 可以是 -j or -t, -j 提示程序解析JTDX产生的日志文件， -t 提示程序解析WSJT-X产生的日志文件。
+
 y.txt 是日志文件名, 它可能是202401_ALL.txt (JTDX) 或者 ALL.txt (WSJT-X)。
 
 将您电脑中的JTDX/WSJT-X日志文件复制至软件目录下，如我的目录为C:\Users\Administrator\AppData\Local\JTDX ，在这个文件夹中有许多以年份和月份命名的文件，如202108_ALL.txt。比如，我将2025年1月的JTDX文件复制在了这个文件夹下，想要分析它，那么命令就应该是
 FT8LogParser.exe -j 202501_ALL.txt
+
 随软件自带了一个JTDX的日志文件example_J.txt和WSJT-X的日志文件example_W.txt，你可以使用他们来熟悉整个过程。
+
 点击回车，开始执行程序，程序执行过程是全自动的，你可以通过进度条来检查当前程序的运行过程。
+
 执行完成后，程序会提示你生成的报告文件，比如你的日志文件名是202501_ALL.txt，那么输出的报告文件就应该是analyse_result_202501_ALL.csv，可以使用Excel等表格软件打开它。
+
 软件包中的其他文件均为软件运行时的必要文件，请不要修改和删除。
 
 3、输出报告
 
 输出的报告由表头和数据构成。其中，表头的格式是固定的：
+
 year	month	day	hour	minute
+
 表示的是该条数据的年月日时分
+
 band
+
 指示了该条数据的波段信息，如果同一时刻有多个波段信号记录，则会分成年月日时分相同的多条记录，其band信息不同。
+
 count	avg_snr
+
 指示了该条数据的总计数和平均SNR
+
 xx_count	xx_avg_snr
+
 指示了在此时此刻，来自xx大洲的信号的计数和这些信号的平均SNR，xx可以为AS EU NA SA AF OC OTR
+
 dis_xx_count	 dis_xx_avg_snr
-指示了在此时此刻，收到距离为xx范围的信号的计数和这些信号的平均SNR，其中，l1k为1千公里以下的信号，1k3k代表距离为1000km~3000km的信号、3k5k代表距离为3000km~5000km的信号、以此类推。o11k代表距离大于11000公里以外的信号。
+
+指示了在此时此刻，收到距离为xx范围的信号的计数和这些信号的平均SNR，其中，l1k为1千公里以下的信号，1k3k代表距离为1000km-3000km的信号、3k5k代表距离为3000km-5000km的信号、以此类推。o11k代表距离大于11000公里以外的信号。
+
 date
+
 为以YYYYMMDD HHMMSS形式记录的年月日时分秒信息，可以供其他软件进一步处理和读取用。
 
 4、免责声明
